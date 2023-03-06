@@ -1,0 +1,81 @@
+﻿@page "/todos"
+
+<PageTitle>
+    Todos
+</PageTitle>
+
+<h1>
+    Todos
+</h1>
+
+<MudStack>
+    @foreach (var todo in MyTodos)
+    {
+        <MudCard Elevation="3">
+            <MudCardContent>
+                <MudStack Row=true
+                          AlignItems="AlignItems.Center">
+                    <MudCheckBox @bind-Checked="@todo.IsCompleted" />
+                    <MudText Typo="Typo.h6">
+                        @todo.Title
+                    </MudText>
+                </MudStack>
+                <MudText Typo="Typo.body1"
+                         Class="todo-description">
+                    @todo.Description
+                </MudText>
+                <MudText Typo="Typo.body2"
+                         Class="todo-description">
+                    @todo.DueDate?.ToString("MMM dd yyyy")
+                </MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudStack Row=true>
+                    <MudIconButton Title="Edit"
+                                   Icon="@Icons.Material.Filled.Edit"
+                                   Color="Color.Default" />
+                    <MudIconButton Title="Delete"
+                                   Icon="@Icons.Material.Filled.Delete"
+                                   Color="Color.Error" />
+                </MudStack>
+            </MudCardActions>
+        </MudCard>
+    }
+</MudStack>
+
+@code {
+    internal List<Todo> MyTodos = new List<Todo>
+    {
+        new Todo
+        {
+            Title = "Buy milk",
+            Description = "Get the cheapest skim milk available",
+        },
+        new Todo
+        {
+            Title = "Buy eggs",
+            Description = "Brown only",
+            IsCompleted = true,
+        },
+        new Todo
+        {
+            Title = "Mail check",
+            Description = "A description",
+            DueDate = DateTime.Today.AddDays(1),
+        },
+    };
+
+    internal class Todo
+    {
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public bool IsCompleted { get; set; } = false;
+        public DateTime? DueDate { get; set; }
+    }
+}
+
+<style>
+    .todo-description {
+        color: var(--mud-palette-text-secondary);
+    }
+</style>

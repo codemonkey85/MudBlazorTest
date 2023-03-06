@@ -1,0 +1,26 @@
+﻿@page "/counter"
+
+<PageTitle>
+    Counter
+</PageTitle>
+
+<h1>
+    Counter
+</h1>
+
+<span>
+    Count is @counterValue
+</span>
+
+<div>
+    <MudButton OnClick="@Count"
+               Color="Color.Primary"
+               Variant="Variant.Filled">
+        Count
+    </MudButton>
+</div>
+
+@code {
+    int counterValue = 0;
+    private void Count() => counterValue++;
+}
